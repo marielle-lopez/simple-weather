@@ -8,8 +8,8 @@ const DateAndTime = ({ dateDay, dateMonth, timeHours, timeMinutes }) => {
       </p>
 
       <p className={styles.time}>
-        {timeHours >= 12 ? timeHours - 12 : timeHours}:{timeMinutes}{" "}
-        {timeHours >= 12 ? "pm" : "am"}
+        {timeHours >= 12 ? timeHours - 12 : timeHours}:
+        {timeMinutes === 0 ? "00" : timeMinutes} {timeHours >= 12 ? "pm" : "am"}
       </p>
     </div>
   );
