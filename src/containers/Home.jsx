@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import styles from "./Home.module.scss";
+import appStyles from "../App.module.scss";
+import temperatureStyles from "../components/Temperature/Temperature.module.scss";
+import statusStyles from "../components/Status/Status.module.scss";
 
 import Condition from "../components/Condition/Condition";
 import DateAndTime from "../components/DateAndTime/DateAndTime";
@@ -11,7 +14,10 @@ export const Home = ({ setBackground }) => {
   const [information, setInformation] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [classes, setClasses] = useState([styles.wrapper]);
+  const [temperatureClasses, setTemperatureClasses] = useState(
+    temperatureStyles.day
+  );
+  const [statusClasses, setStatusClasses] = useState(statusStyles.day);
 
   const month = {
     0: "January",
@@ -60,6 +66,17 @@ export const Home = ({ setBackground }) => {
           uv: response.current.uv,
         };
 
+        console.log(timeHours);
+        console.log(appStyles.background__night);
+
+        if (data.status.includes("rain") && timeHours >= 8 && timeHours < 20) {
+          setBackground(appStyles.background__day_clear);
+        } else if (timeHours >= 20 || (timeHours > 0 && timeHours < 8)) {
+          setBackground(appStyles.background__night);
+          setTemperatureClasses(temperatureStyles.night);
+          setStatusClasses(statusStyles.night);
+        }
+
         setInformation(data);
         setLoading(false);
       } catch (error) {
@@ -80,10 +97,13 @@ export const Home = ({ setBackground }) => {
   }
 
   return (
-    <div className={classes.join(" ")}>
+    <div className={styles.wrapper}>
       <div className={styles.information_wrapper}>
-        <Temperature temperature={information.temperature} />
-        <Status status={information.status} />
+        <Temperature
+          temperature={information.temperature}
+          classes={temperatureClasses}
+        />
+        <Status status={information.status} classes={statusClasses} />
       </div>
       <div className={styles.detailed_information_wrapper}>
         <div className={styles.detailed_information}>

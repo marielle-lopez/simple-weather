@@ -2,6 +2,11 @@
   &__day_clear {
     background-image: linear-gradient(#c5e5f6, #b3d6fc);
   }
+
+  &__night {
+    background-image: linear-gradient(#0f1418, #0c1013); // night, clear
+  }
+
   // background-image: linear-gradient(#c5e5f6, #b3d6fc); // day, clear
   // background-image: linear-gradient(#7a66a0, #fbaf68); // dawn, clear
   // background-image: linear-gradient(#4069b4, #fbaf68); // dusk, clear
