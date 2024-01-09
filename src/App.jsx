@@ -10,10 +10,12 @@ import styles from "./App.module.scss";
 import { Home } from "./containers/Home";
 
 function App() {
+  const [background, setBackground] = useState(styles.background__day_clear);
+
   return (
-    <>
-      <Home />
-    </>
+    <div className={background}>
+      <Home setBackground={setBackground} />
+    </div>
   );
 }
 

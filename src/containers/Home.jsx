@@ -7,7 +7,7 @@ import Location from "../components/Location/Location";
 import Temperature from "../components/Temperature/Temperature";
 import Status from "../components/Status/Status";
 
-export const Home = () => {
+export const Home = ({ setBackground }) => {
   const [information, setInformation] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -57,6 +57,7 @@ export const Home = () => {
           status: response.current.condition.text,
           humidity: response.current.humidity,
           wind: response.current.wind_kph,
+          uv: response.current.uv,
         };
 
         setInformation(data);
@@ -100,6 +101,7 @@ export const Home = () => {
               type="Humidity"
             />
             <Condition condition={information.wind} unit="kph" type="Wind" />
+            <Condition condition={information.uv} type="UV" />
           </div>
         </div>
       </div>

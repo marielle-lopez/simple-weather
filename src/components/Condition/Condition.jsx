@@ -1,6 +1,6 @@
 import styles from "./Condition.module.scss";
 
-const Condition = ({ condition, unit, type }) => {
+const Condition = ({ condition, unit = "", type }) => {
   return (
     <div className={styles.wrapper}>
       <p className={styles.title}>{type.toUpperCase()}</p>
